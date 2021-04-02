@@ -14,7 +14,12 @@ VALCIR02{
     - Criado e movido para o diretorio ~/.list_commits;
 }
 
-VALCIR 03{
+VALCIR03{
     - Renomeado pasta "Conexoes-Wirings-Diagrama-Diagram" para "Conexoes_Diagrama";
     - Criado o arquivo de configuracao .gitignore e teste do mesmo;
+}
+
+VALCIR04{
+    - Adicionado pasta datasheet com pdfs de espeficações tecnicas dos componentes;
+    - Alteracao do arquivo ~/.gitignore para inorar a mesma;
 }

@@ -1,4 +1,6 @@
 # Configuração para ser ignorado os arquivos e pastas
-Aplication/.vscode/
-Aplication/.vscode/*
-Aplication/.gitattributes
+.vscode/
+.vscode/*
+.gitattributes
+# Pasta de especificações tecnicas dos componentes
+.datasheets
