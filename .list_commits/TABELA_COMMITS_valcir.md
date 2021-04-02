@@ -23,3 +23,10 @@ VALCIR04{
     - Adicionado pasta datasheet com pdfs de espeficações tecnicas dos componentes;
     - Alteracao do arquivo ~/.gitignore para inorar a mesma;
 }
+
+VALCIR05{
+    - mc3d - Modelo Computadorizado 3D;
+    - Adicionado pasta "~/.mc3d" para modelos 3D do projeto;
+    - Adicionado o mesmo no .gitignore;
+    - Levantado dados tecenicos do Modulo CD e imagem salva na pasta ~/.arts;
+}

@@ -4,3 +4,5 @@
 .gitattributes
 # Pasta de especificações tecnicas dos componentes
 .datasheets
+# Pasta de Desenhos / Modelos Computadorizados 3D
+.mc3d
