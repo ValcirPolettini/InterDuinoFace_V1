@@ -30,3 +30,8 @@ VALCIR05{
     - Adicionado o mesmo no .gitignore;
     - Levantado dados tecenicos do Modulo CD e imagem salva na pasta ~/.arts;
 }
+
+VALCIR06{
+    - pcb - Printed Circuit Board(Placa de Circuito Impresso);
+    - Adicionado pasta "/.pcb" para desenenhos/diagramas do cirtcuito logico e eletrico;
+}

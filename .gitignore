@@ -1,8 +1,9 @@
 # Configuração para ser ignorado os arquivos e pastas
-.vscode/
-.vscode/*
+.vscode
 .gitattributes
 # Pasta de especificações tecnicas dos componentes
 .datasheets
 # Pasta de Desenhos / Modelos Computadorizados 3D
 .mc3d
+# Pasta de desenenhos / diagramas do cirtcuito logico e eletrico
+.pcb
