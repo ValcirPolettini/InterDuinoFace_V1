@@ -1,0 +1,4 @@
+# Configuração para ser ignorado os arquivos e pastas
+Aplication/.vscode/
+Aplication/.vscode/*
+Aplication/.gitattributes

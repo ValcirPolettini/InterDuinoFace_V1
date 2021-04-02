@@ -1,3 +1,5 @@
+Leia o arquivo ~/.list_commits/TABELA_COMMITS_valcir.md com o indice para maiores informacoes;
+
 VALCIR01{
     - Realizado levantamento de requisitos, descricao do Arduino Nano V3 (atmega 328p);
     - Realizado o desenvolvimento locigo dos multiplexadores e realizado separação de dados e criterios de importancia dos pinos;
@@ -10,4 +12,9 @@ VALCIR01{
 VALCIR02{
     - Renomeado aqruivo TABELA_COMITTS para TABELA_COMITTS_valcir;
     - Criado e movido para o diretorio ~/.list_commits;
+}
+
+VALCIR 03{
+    - Renomeado pasta "Conexoes-Wirings-Diagrama-Diagram" para "Conexoes_Diagrama";
+    - Criado o arquivo de configuracao .gitignore e teste do mesmo;
 }
