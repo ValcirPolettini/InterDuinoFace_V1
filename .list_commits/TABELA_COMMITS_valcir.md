@@ -6,3 +6,8 @@ VALCIR01{
     - Imagem de pinagem do arduino no diretorio ~/.arts;
     - Criado "tabela" para codigos e descrições anotados parecidos com programacao C++;
 }
+
+VALCIR02{
+    - Renomeado aqruivo TABELA_COMITTS para TABELA_COMITTS_valcir;
+    - Criado e movido para o diretorio ~/.list_commits;
+}
