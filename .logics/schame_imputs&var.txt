@@ -1,0 +1,36 @@
+ENTRADAS: | TIPO: | NVL PRIORIDADE:PLACA(0),DEMUX(A,B): | 
+rpm; | pwm; | 0000:0 | 
+velocidade; | pwm; | 0001:0 | 
+vazão combustivel; | pwm; | 0001:0 | 
+tmp. motor; | analog(0-12v) | 0000:0 | 
+cebolao oleo motor; | digital(HL); | 0000:0 | 
+tensao bat.; | analog(0-12v) | 0001:0 | 
+litragem tanque; | analog(0-12v) | 0001:0 | 
+vacumetro; | analog(0-12v) | 0001:0 | 
+pressão oleo; | analog(0-12v) | 0001:0 | 
+temperatura oleo; | analog(0-12v) | 0001:0 | 
+pressão combustivel; | analog(0-12v) | 0002:0 | 
+temp. ambiente; | analog(0-12v) | 0002:0 | 
+temp. cebolao radiador; | digital(HL); | 2 | 
+seta esquerda; | digital(HL); | 3 | 
+seta direita; | digital(HL); | 3 | 
+pisca lerta; | digital(HL); | 3 | 
+nivel fluido freio; | digital(HL); | 3 | 
+sinal parking; | digital(HL); | 3 | 
+limpador vidro; | digital(HL); | 3:A,B | 
+farol; | digital(HL); | 3:A,B | 
+farol alto; | digital(HL); | 3:A,B | 
+
+marcha 1; | digital(HL); | 4:A,B | 
+marcha 2; | digital(HL); | 4:A,B | 
+marcha 3; | digital(HL); | 4:A,B | 
+marcha 4; | digital(HL); | 4:A,B | 
+marcha 5; | digital(HL); | 4:A,B | 
+marcha 6; | digital(HL); | 4:A,B | 
+marcha 7; | digital(HL); | 4:A,B | 
+porta 1; | digital(HL); | 4:A,B | 
+porta 2; | digital(HL); | 4:A,B | 
+porta 3; | digital(HL); | 4:A,B | 
+porta 4; | digital(HL); | 4:A,B | 
+porta 5; | digital(HL); | 4:A,B | 
+porta 6; | digital(HL); | 4:A,B |
