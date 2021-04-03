@@ -35,3 +35,9 @@ VALCIR06{
     - pcb - Printed Circuit Board(Placa de Circuito Impresso);
     - Adicionado pasta "/.pcb" para desenenhos/diagramas do cirtcuito logico e eletrico;
 }
+
+VALCIR07{
+    - Corrigido problema do projeto utilizando o SimulIDE SR4 x64 Windows;
+    - Utilizado na simulacao o CI cd74ch4067;
+    - Upload da pasta .pcb e seus dados;
+}
