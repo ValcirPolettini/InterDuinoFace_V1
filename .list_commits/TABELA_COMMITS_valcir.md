@@ -1,4 +1,5 @@
 Leia o arquivo ~/.list_commits/TABELA_COMMITS_valcir.md com o indice para maiores informacoes;
+Read the file ~ /.list_commits/TABELA_COMMITS_valcir.md with the index for more information;
 
 VALCIR01{
     - Realizado levantamento de requisitos, descricao do Arduino Nano V3 (atmega 328p);
@@ -40,4 +41,13 @@ VALCIR07{
     - Corrigido problema do projeto utilizando o SimulIDE SR4 x64 Windows;
     - Utilizado na simulacao o CI cd74ch4067;
     - Upload da pasta .pcb e seus dados;
+}
+
+VALCIR08{
+    - Renomeado pastas para ingles:
+    - .modulosCan -> .modulesCan;
+    - Conexoes_Diagrama -> Wirings_Diagram;
+    - Corrigido indexacao dos pinos conforme a tabela verdade na pasta ~/.logics/ITENS-NECESSIDADE.xlsx
+    - Iniciado programação de algoritmo(fluxograma) no software DIA;
+    - Adicionado informacao sobre pastas no readme principal;
 }
