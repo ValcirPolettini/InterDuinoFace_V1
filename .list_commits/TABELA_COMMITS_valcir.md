@@ -51,3 +51,12 @@ VALCIR08{
     - Iniciado programação de algoritmo(fluxograma) no software DIA;
     - Adicionado informacao sobre pastas no readme principal;
 }
+
+VALCIR09{
+    - Programado pinos e variaveis no arquivo [Interduinoface_v1](https://github.com/ValcirPolettini/InterDuinoFace_V1/blob/main/Interduinoface_v1.ino)
+    - Alteracao do readme para linkar os textos aos arquivos correspondentes;
+    - Alteracao planilha ITENS-NECESSIDADES.xlsx <- "ORD.";
+    - Adicionado biblioteca [arduino-ad-mux-lib 3.0 - 2021/04](https://github.com/stechio/arduino-ad-mux-lib) para operar demux de 16 canais em libraries autor: [stechio](https://github.com/stechio);
+    - Alteracao do arquivo [Mux.h]() para aceitar 16 em vez 8 canais;
+    - Adicionado pasta [.androidControls](https://github.com/ValcirPolettini/InterDuinoFace_V1/tree/main/.androidCotrols) para o projeto do apk q ira monitorar a porta serial atras de comandos para controlar brilho, som e tela do RealDash;
+}

@@ -51,8 +51,31 @@
  * PWM():
 **/
 
+// Include lib Demux 16 channel
+#include <Mux.h>
+using namespace admux;
 
 // Arduino digital and analog pins
+int A=19; //Pino A0 fisico
+int B=20; //Pino A1 fisico
+int C=9;  //Pino D0 fisico
+int D=8;  //Pino D1 fisico
+int S0=5;  //Pino D2 fisico
+int S1=7;  //Pino D4 fisico
+int S2=10; //Pino D7 fisico
+int S3=11; //Pino D8 fisico
+
+/*
+ * Creates a Mux instance.
+ * 1st argument is the SIG (signal) pin (Arduino analog input pin A0).
+ * 2nd argument is the S0-S3 (channel control) pins (Arduino pins 8, 9, 10, 11).
+ */
+Mux muxA(Pin(A, INPUT, PinType::Analog), Pinset(S0,S1,S2,S3));
+Mux muxB(Pin(B, INPUT, PinType::Analog), Pinset(S0,S1,S2,S3));
+Mux muxC(Pin(C, INPUT, PinType::Digital), Pinset(S0,S1,S2,S3));
+Mux muxD(Pin(D, INPUT, PinType::Digital), Pinset(S0,S1,S2,S3));
+Mux muxCo(Pin(C, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxCo - Mux digital C for OUTPUT(5V)
+Mux muxDo(Pin(D, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxDo - Mux digital D for OUTPUT(5V)
 unsigned int digitalPins = 0;
 int analogPins[7] = {0};
 
@@ -66,6 +89,10 @@ unsigned int textCounter = 0;
 void setup()
 {
   // init serial
+  S0=HIGH;
+  S1=HIGH;
+  S2=HIGH;
+  S3=HIGH;
   Serial.begin(115200);
   delay(100);
 }
@@ -73,8 +100,14 @@ void setup()
 
 void loop()
 {
+  Serial.print("\n------------------");
   ReadDigitalStatuses();
+  //delay(500);
   ReadAnalogStatuses();
+  Serial.print("------------------\n");
+  //delay(500);
+  //Serial.print();
+  /*
   SendCANFramesToSerial();
 
   // just some dummy values for simulated engine parameters
@@ -100,13 +133,165 @@ void loop()
   {
     textCounter = 0;
   }
-  //Serial.print("\n");
-  //delay(1000);
+  */
 }
 
+/*
+// Função para enderecar o leitor no pino correto
+void boolean Pos(int bdx){
+  if (bdx == 15){
+    SO=LOW;S1=LOW;S2=LOW;S3=LOW;
+    if (S0==LOW and S1==LOW and S2==LOW and S3==LOW){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 14){
+    SO=HIGH;S1=HIGH;S2=HIGH;S3=LOW;
+    if (S0==HIGH and S1==HIGH and S2==HIGH and S3==LOW){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 13){
+    SO=HIGH;S1=HIGH;S2=LOW;S3=HIGH;
+    if (S0==HIGH and S1==HIGH and S2==LOW and S3==HIGH){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 12){
+    SO=HIGH;S1=HIGH;S2=LOW;S3=LOW;
+    if (S0==HIGH and S1==HIGH and S2==LOW and S3==LOW){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 11){
+    SO=HIGH;S1=LOW;S2=HIGH;S3=HIGH;
+    if (S0==HIGH and S1==LOW and S2==HIGH and S3==HIGH){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 10){
+    SO=HIGH;S1=LOW;S2=HIGH;S3=LOW;
+    if (S0==HIGH and S1==LOW and S2==HIGH and S3==LOW){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 9){
+    SO=HIGH;S1=LOW;S2=LOW;S3=HIGH;
+    if (S0==HIGH and S1==LOW and S2==LOW and S3==HIGH){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 8){
+    SO=HIGH;S1=LOW;S2=LOW;S3=LOW;
+    if (S0==HIGH and S1==LOW and S2==LOW and S3==LOW){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 7){
+    SO=LOW;S1=HIGH;S2=HIGH;S3=HIGH;
+    if (S0==LOW and S1==HIGH and S2==HIGH and S3==HIGH){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 6){
+    SO=LOW;S1=HIGH;S2=HIGH;S3=LOW;
+    if (S0==LOW and S1==HIGH and S2==HIGH and S3==LOW){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 5){
+    SO=LOW;S1=HIGH;S2=LOW;S3=HIGH;
+    if (S0==LOW and S1==HIGH and S2==LOW and S3==HIGH){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 4){
+    SO=LOW;S1=HIGH;S2=LOW;S3=LOW;
+    if (S0==LOW and S1==HIGH and S2==LOW and S3==LOW){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 3){
+    SO=LOW;S1=LOW;S2=HIGH;S3=HIGH;
+    if (S0==LOW and S1==LOW and S2==HIGH and S3==){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 2){
+    SO=LOW;S1=LOW;S2=HIGH;S3=LOW;
+    if (S0==LOW and S1==LOW and S2==HIGH and S3==LOW){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 1){
+    SO=LOW;S1=LOW;S2=LOW;S3=HIGH;
+    if (S0==LOW and S1==LOW and S2==LOW and S3==HIGH){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+  if (bdx == 0){
+    SO=LOW;S1=LOW;S2=LOW;S3=LOW;
+    if (S0==LOW and S1==LOW and S2==LOW and S3==LOW){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+}
+
+// Função para retonar a leitura do pino demultiplexado pela id BDX(vide o arquivo ITENS-NECESSIDADES.xlxs)
+void boolean int Demux(bdx){
+  if(Pos(bdx)){
+    return analogRead=(A0);analogRead(A1);digitalRead(D0);digitalRead(D1);
+  }  
+}
+
+void boolean Demux2(int bdx, port){
+  if(Pos(bdx){
+    = (analogRead(port) or digitalRead(port));
+    return TRUE;
+  }else{
+    return FALSE;
+  }
+}
+
+void Demux3(byte bdx){
+}
+*/
 
 void ReadDigitalStatuses()
 {
+  Serial.print("\n++++++++++++++++++++++++++++\n");
   // read status of digital pins (1-13)
   digitalPins = 0;
 
@@ -115,18 +300,48 @@ void ReadDigitalStatuses()
   {
     if (digitalRead(i) == HIGH) digitalPins |= (1 << bitposition);
     bitposition++;
+    Serial.print("\nReadDigitalStatuses: ");
+    Serial.print(digitalPins);
+    Serial.print(", BitPosition: ");
+    Serial.print(bitposition);
   }
+  // debug
+  Serial.print("\n\nReadDigitalStatuses final: ");
+  Serial.print(digitalPins);
+  Serial.print("\n++++++++++++++++++++++++++++\n");
+  //delay(2000);
 }
 
 
 void ReadAnalogStatuses()
 {
+  Serial.print("\n============================\n");
   //analogPins[0] = analogRead(0);
   // read analog pins (0-7)
   for (int i=0; i<7; i++)
   {
     analogPins[i] = analogRead(i);
+    Serial.print("\nReadAnalogStatuses:(");
+    Serial.print(i);
+    Serial.print("):");
+    Serial.print(analogPins[i]);
+    //Serial.print("\n");
   }
+  Serial.print("\nFinal: ");
+  Serial.print(analogPins[0]);
+  Serial.print(",");
+  Serial.print(analogPins[1]);
+  Serial.print(",");
+  Serial.print(analogPins[2]);
+  Serial.print(",");
+  Serial.print(analogPins[3]);
+  Serial.print(",");
+  Serial.print(analogPins[4]);
+  Serial.print(",");
+  Serial.print(analogPins[5]);
+  Serial.print(",");
+  Serial.print(analogPins[6]);
+  Serial.print("\n============================\n");
 }
 
 
