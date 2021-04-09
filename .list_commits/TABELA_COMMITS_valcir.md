@@ -60,3 +60,7 @@ VALCIR09{
     - Alteracao do arquivo [Mux.h]() para aceitar 16 em vez 8 canais;
     - Adicionado pasta [.androidControls](https://github.com/ValcirPolettini/InterDuinoFace_V1/tree/main/.androidCotrols) para o projeto do apk q ira monitorar a porta serial atras de comandos para controlar brilho, som e tela do RealDash;
 }
+
+VALCIR10{
+    - Adicionado parametro em [.gitignore]() para exclusão da pasta [.vscode]();
+}
