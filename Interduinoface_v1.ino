@@ -55,6 +55,36 @@
 #include <Mux.h>
 using namespace admux;
 
+// Variables
+//char S[] = {A,B,C,D};
+//boolean bdx[15][3];
+//boolean bdx[][] = {{FALSE,FALSE,FALSE,FALSE},{FALSE,FALSE,FALSE,FALSE},{0,0,0,0}}; //0
+/*
+                  {0,0,0,1}, //1
+                  {0,0,1,0}, //2
+                  {0,0,1,1}, //3
+                  {0,1,0,0}, //4
+                  {0,1,0,1}, //5
+                  {0,1,1,0}, //6
+                  {0,1,1,1}, //7
+                  {1,0,0,0}, //8
+                  {1,0,0,1}, //9
+                  {1,0,1,0}, //10
+                  {1,0,1,1}, //11
+                  {1,1,0,0}, //12
+                  {1,1,0,1}, //13
+                  {1,1,1,0}, //14
+                  {1,1,1,1} //15
+;*/
+unsigned int digitalPins = 0;
+int analogPins[7] = {0};
+
+unsigned int rpm = 0;
+unsigned int kpa = 992; // 99.2
+unsigned int tps = 965; // 96.5
+unsigned int clt = 80;  // 80 - 100
+unsigned int textCounter = 0;
+
 // Arduino digital and analog pins
 int A=19; //Pino A0 fisico
 int B=20; //Pino A1 fisico
@@ -76,15 +106,6 @@ Mux muxC(Pin(C, INPUT, PinType::Digital), Pinset(S0,S1,S2,S3));
 Mux muxD(Pin(D, INPUT, PinType::Digital), Pinset(S0,S1,S2,S3));
 Mux muxCo(Pin(C, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxCo - Mux digital C for OUTPUT(5V)
 Mux muxDo(Pin(D, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxDo - Mux digital D for OUTPUT(5V)
-unsigned int digitalPins = 0;
-int analogPins[7] = {0};
-
-unsigned int rpm = 0;
-unsigned int kpa = 992; // 99.2
-unsigned int tps = 965; // 96.5
-unsigned int clt = 80;  // 80 - 100
-unsigned int textCounter = 0;
-
 
 void setup()
 {
@@ -105,6 +126,16 @@ void loop()
   //delay(500);
   ReadAnalogStatuses();
   Serial.print("------------------\n");
+  for(byte i=0; i <= 15; i++){
+    if(setBdx(i)){
+     Serial.println("BDX: "+(String)i+"...for.......             LEITURAS....");
+     Serial.println("S0:"+(String)digitalRead(S0)+", S1:"+(String)digitalRead(S1)+", S2:"+(String)digitalRead(S2)+", S3:"+(String)digitalRead(S3));
+     Serial.print(" | ");
+     Serial.print(" A0:"+(String)analogRead(A)+" A1:"+(String)analogRead(B)+" D0:"+(String)analogRead(C)+" D1:"+(String)digitalRead(D));
+    }else{
+      Serial.print("Falha na execucao de BDX:"+(String)i);
+    }
+  }
   //delay(500);
   //Serial.print();
   /*
@@ -136,9 +167,8 @@ void loop()
   */
 }
 
-/*
 // Função para enderecar o leitor no pino correto
-void boolean Pos(int bdx){
+void boolean setDemux(int bdx){
   if (bdx == 15){
     SO=LOW;S1=LOW;S2=LOW;S3=LOW;
     if (S0==LOW and S1==LOW and S2==LOW and S3==LOW){
@@ -268,7 +298,17 @@ void boolean Pos(int bdx){
     }
   }
 }
+/*
+// Função para retonar a leitura do pino demultiplexado pela id BDX(vide o arquivo ITENS-NECESSIDADES.xlxs)
+void unsigned readDemux(bdx){
+  if(setDemux(bdx)){
+   return analogRead=(A0);analogRead(A1);digitalRead(D0);digitalRead(D1);
+  }else{
+    return false;
+  }
+}
 
+/*
 // Função para retonar a leitura do pino demultiplexado pela id BDX(vide o arquivo ITENS-NECESSIDADES.xlxs)
 void boolean int Demux(bdx){
   if(Pos(bdx)){
