@@ -64,3 +64,7 @@ VALCIR09{
 VALCIR10{
     - Adicionado parametro em [.gitignore]() para exclusão da pasta [.vscode]();
 }
+
+VALCIR11{
+    - Iniciado programacao e teste de leitura do motiplexador utilizando o SimullIDE.
+}
