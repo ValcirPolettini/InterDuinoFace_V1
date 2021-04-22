@@ -68,3 +68,9 @@ VALCIR10{
 VALCIR11{
     - Iniciado programacao e teste de leitura do motiplexador utilizando o SimullIDE.
 }
+
+VALCIR12{
+    - Criado firmware para teste do do demultiplexar e tabela verdade;
+    - Testado pelo simulador SimulIDE -> .pcb\teste_fw.simu;
+    - Alterado pinos na tabela logica(verdade) conforme os pinos corretos;
+}

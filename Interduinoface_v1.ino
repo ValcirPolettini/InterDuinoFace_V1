@@ -86,58 +86,71 @@ unsigned int clt = 80;  // 80 - 100
 unsigned int textCounter = 0;
 
 // Arduino digital and analog pins
-int A=19; //Pino A0 fisico
-int B=20; //Pino A1 fisico
-int C=9;  //Pino D0 fisico
-int D=8;  //Pino D1 fisico
-int S0=5;  //Pino D2 fisico
-int S1=7;  //Pino D4 fisico
-int S2=10; //Pino D7 fisico
-int S3=11; //Pino D8 fisico
-
+/*int A=A0;//19; //Pino A0 fisico
+int B=A1;//20; //Pino A1 fisico
+int C=D0;//9;  //Pino D0 fisico
+int D=D1;//8;  //Pino D1 fisico
+*/
+int S0=2; //Pino D2 fisico
+int S1=4; //Pino D4 fisico
+int S2=7; //Pino D7 fisico
+int S3=8; //Pino D8 fisico
 /*
  * Creates a Mux instance.
  * 1st argument is the SIG (signal) pin (Arduino analog input pin A0).
  * 2nd argument is the S0-S3 (channel control) pins (Arduino pins 8, 9, 10, 11).
  */
-Mux muxA(Pin(A, INPUT, PinType::Analog), Pinset(S0,S1,S2,S3));
+/*Mux muxA(Pin(A, INPUT, PinType::Analog), Pinset(S0,S1,S2,S3));
 Mux muxB(Pin(B, INPUT, PinType::Analog), Pinset(S0,S1,S2,S3));
 Mux muxC(Pin(C, INPUT, PinType::Digital), Pinset(S0,S1,S2,S3));
 Mux muxD(Pin(D, INPUT, PinType::Digital), Pinset(S0,S1,S2,S3));
 Mux muxCo(Pin(C, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxCo - Mux digital C for OUTPUT(5V)
 Mux muxDo(Pin(D, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxDo - Mux digital D for OUTPUT(5V)
-
-void setup()
-{
-  // init serial
-  S0=HIGH;
-  S1=HIGH;
-  S2=HIGH;
-  S3=HIGH;
-  Serial.begin(115200);
+*/
+void setup(){
+  Serial.begin(115200); // init serial
+  Serial.print("\nOla, setup iniciando...");
+  pinMode(S0, OUTPUT);
+  pinMode(S1, OUTPUT);
+  pinMode(S2, OUTPUT);
+  pinMode(S3, OUTPUT);
+  digitalWrite(S0, HIGH);
+  digitalWrite(S1, HIGH);
+  digitalWrite(S2, HIGH);
+  digitalWrite(S3, HIGH);
+  delay(1000);
+  digitalWrite(S0, LOW);
+  digitalWrite(S1, LOW);
+  digitalWrite(S2, LOW);
+  digitalWrite(S3, LOW);
+  delay(500);
+  Serial.print("\nOla, setup executado");
   delay(100);
 }
 
 
 void loop()
 {
-  Serial.print("\n------------------");
+  Serial.println("\nOla, loop sendo inciado...");
+  delay(500);
+  /*Serial.print("\n------------------");
   ReadDigitalStatuses();
   //delay(500);
   ReadAnalogStatuses();
   Serial.print("------------------\n");
+  */
   for(byte i=0; i <= 15; i++){
-    if(setBdx(i)){
-     Serial.println("BDX: "+(String)i+"...for.......             LEITURAS....");
-     Serial.println("S0:"+(String)digitalRead(S0)+", S1:"+(String)digitalRead(S1)+", S2:"+(String)digitalRead(S2)+", S3:"+(String)digitalRead(S3));
-     Serial.print(" | ");
-     Serial.print(" A0:"+(String)analogRead(A)+" A1:"+(String)analogRead(B)+" D0:"+(String)analogRead(C)+" D1:"+(String)digitalRead(D));
+    delay(500);
+    if(setDemux(i)){
+     Serial.println("BDX: "+(String)i+" | S0:"+digitalRead(S0)+", S1:"+digitalRead(S1)+", S2:"+digitalRead(S2)+", S3:"+digitalRead(S3)+ " | A0:"+(String)analogRead(A0)+" A1:"+(String)analogRead(A1)+" D6:"+(String)digitalRead(6)+" D5:"+(String)digitalRead(5));
+     delay(500);
     }else{
-      Serial.print("Falha na execucao de BDX:"+(String)i);
+      Serial.print("\nFalha na execucao de BDX:"+(String)i);
+      delay(5000);
     }
   }
-  //delay(500);
-  //Serial.print();
+  Serial.println("\nOla, loop finalizado.");
+  delay(500);
   /*
   SendCANFramesToSerial();
 
@@ -168,133 +181,181 @@ void loop()
 }
 
 // Função para enderecar o leitor no pino correto
-void boolean setDemux(int bdx){
+bool setDemux(int bdx){
   if (bdx == 15){
-    SO=LOW;S1=LOW;S2=LOW;S3=LOW;
-    if (S0==LOW and S1==LOW and S2==LOW and S3==LOW){
-      return TRUE;
+    digitalWrite(S0, 1);
+    digitalWrite(S1, 1);
+    digitalWrite(S2, 1);
+    digitalWrite(S3, 1);
+    if (digitalRead(S0)==HIGH and digitalRead(S1)==HIGH and digitalRead(S2)==HIGH and digitalRead(S3)==HIGH){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 14){
-    SO=HIGH;S1=HIGH;S2=HIGH;S3=LOW;
-    if (S0==HIGH and S1==HIGH and S2==HIGH and S3==LOW){
-      return TRUE;
+    digitalWrite(S0, 1);
+    digitalWrite(S1, 1);
+    digitalWrite(S2, 1);
+    digitalWrite(S3, 0);
+    if (digitalRead(S0)==HIGH and digitalRead(S1)==HIGH and digitalRead(S2)==HIGH and digitalRead(S3)==LOW){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 13){
-    SO=HIGH;S1=HIGH;S2=LOW;S3=HIGH;
-    if (S0==HIGH and S1==HIGH and S2==LOW and S3==HIGH){
-      return TRUE;
+    digitalWrite(S0, 1);
+    digitalWrite(S1, 1);
+    digitalWrite(S2, 0);
+    digitalWrite(S3, 1);
+    if (digitalRead(S0)==HIGH and digitalRead(S1)==HIGH and digitalRead(S2)==LOW and digitalRead(S3)==HIGH){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 12){
-    SO=HIGH;S1=HIGH;S2=LOW;S3=LOW;
-    if (S0==HIGH and S1==HIGH and S2==LOW and S3==LOW){
-      return TRUE;
+    digitalWrite(S0, 1);
+    digitalWrite(S1, 1);
+    digitalWrite(S2, 0);
+    digitalWrite(S3, 0);
+    if (digitalRead(S0)==HIGH and digitalRead(S1)==HIGH and digitalRead(S2)==LOW and digitalRead(S3)==LOW){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 11){
-    SO=HIGH;S1=LOW;S2=HIGH;S3=HIGH;
-    if (S0==HIGH and S1==LOW and S2==HIGH and S3==HIGH){
-      return TRUE;
+    digitalWrite(S0, 1);
+    digitalWrite(S1, 0);
+    digitalWrite(S2, 1);
+    digitalWrite(S3, 1);
+    if (digitalRead(S0)==HIGH and digitalRead(S1)==LOW and digitalRead(S2)==HIGH and digitalRead(S3)==HIGH){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 10){
-    SO=HIGH;S1=LOW;S2=HIGH;S3=LOW;
-    if (S0==HIGH and S1==LOW and S2==HIGH and S3==LOW){
-      return TRUE;
+    digitalWrite(S0, 1);
+    digitalWrite(S1, 0);
+    digitalWrite(S2, 1);
+    digitalWrite(S3, 0);
+    if (digitalRead(S0)==HIGH and digitalRead(S1)==LOW and digitalRead(S2)==HIGH and digitalRead(S3)==LOW){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 9){
-    SO=HIGH;S1=LOW;S2=LOW;S3=HIGH;
-    if (S0==HIGH and S1==LOW and S2==LOW and S3==HIGH){
-      return TRUE;
+    digitalWrite(S0, 1);
+    digitalWrite(S1, 0);
+    digitalWrite(S2, 0);
+    digitalWrite(S3, 1);
+    if (digitalRead(S0)==HIGH and digitalRead(S1)==LOW and digitalRead(S2)==LOW and digitalRead(S3)==HIGH){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 8){
-    SO=HIGH;S1=LOW;S2=LOW;S3=LOW;
-    if (S0==HIGH and S1==LOW and S2==LOW and S3==LOW){
-      return TRUE;
+    digitalWrite(S0, 1);
+    digitalWrite(S1, 0);
+    digitalWrite(S2, 0);
+    digitalWrite(S3, 0);
+    if (digitalRead(S0)==HIGH and digitalRead(S1)==LOW and digitalRead(S2)==LOW and digitalRead(S3)==LOW){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 7){
-    SO=LOW;S1=HIGH;S2=HIGH;S3=HIGH;
-    if (S0==LOW and S1==HIGH and S2==HIGH and S3==HIGH){
-      return TRUE;
+    digitalWrite(S0, 0);
+    digitalWrite(S1, 1);
+    digitalWrite(S2, 1);
+    digitalWrite(S3, 1);
+    if (digitalRead(S0)==LOW and digitalRead(S1)==HIGH and digitalRead(S2)==HIGH and digitalRead(S3)==HIGH){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 6){
-    SO=LOW;S1=HIGH;S2=HIGH;S3=LOW;
-    if (S0==LOW and S1==HIGH and S2==HIGH and S3==LOW){
-      return TRUE;
+    digitalWrite(S0, 0);
+    digitalWrite(S1, 1);
+    digitalWrite(S2, 1);
+    digitalWrite(S3, 0);
+    if (digitalRead(S0)==LOW and digitalRead(S1)==HIGH and digitalRead(S2)==HIGH and digitalRead(S3)==LOW){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 5){
-    SO=LOW;S1=HIGH;S2=LOW;S3=HIGH;
-    if (S0==LOW and S1==HIGH and S2==LOW and S3==HIGH){
-      return TRUE;
+    digitalWrite(S0, 0);
+    digitalWrite(S1, 1);
+    digitalWrite(S2, 0);
+    digitalWrite(S3, 1);
+    if (digitalRead(S0)==LOW and digitalRead(S1)==HIGH and digitalRead(S2)==LOW and digitalRead(S3)==HIGH){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 4){
-    SO=LOW;S1=HIGH;S2=LOW;S3=LOW;
-    if (S0==LOW and S1==HIGH and S2==LOW and S3==LOW){
-      return TRUE;
+    digitalWrite(S0, 0);
+    digitalWrite(S1, 1);
+    digitalWrite(S2, 0);
+    digitalWrite(S3, 0);
+    if (digitalRead(S0)==LOW and digitalRead(S1)==HIGH and digitalRead(S2)==LOW and digitalRead(S3)==LOW){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 3){
-    SO=LOW;S1=LOW;S2=HIGH;S3=HIGH;
-    if (S0==LOW and S1==LOW and S2==HIGH and S3==){
-      return TRUE;
+    digitalWrite(S0, 0);
+    digitalWrite(S1, 0);
+    digitalWrite(S2, 1);
+    digitalWrite(S3, 1);
+    if (digitalRead(S0)==LOW and digitalRead(S1)==LOW and digitalRead(S2)==HIGH and digitalRead(S3)==HIGH){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 2){
-    SO=LOW;S1=LOW;S2=HIGH;S3=LOW;
-    if (S0==LOW and S1==LOW and S2==HIGH and S3==LOW){
-      return TRUE;
+    digitalWrite(S0, 0);
+    digitalWrite(S1, 0);
+    digitalWrite(S2, 1);
+    digitalWrite(S3, 0);
+    if (digitalRead(S0)==LOW and digitalRead(S1)==LOW and digitalRead(S2)==HIGH and digitalRead(S3)==LOW){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 1){
-    SO=LOW;S1=LOW;S2=LOW;S3=HIGH;
-    if (S0==LOW and S1==LOW and S2==LOW and S3==HIGH){
-      return TRUE;
+    digitalWrite(S0, 0);
+    digitalWrite(S1, 0);
+    digitalWrite(S2, 0);
+    digitalWrite(S3, 1);
+    if (digitalRead(S0)==LOW and digitalRead(S1)==LOW and digitalRead(S2)==LOW and digitalRead(S3)==HIGH){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
   if (bdx == 0){
-    SO=LOW;S1=LOW;S2=LOW;S3=LOW;
-    if (S0==LOW and S1==LOW and S2==LOW and S3==LOW){
-      return TRUE;
+    digitalWrite(S0, 0);
+    digitalWrite(S1, 0);
+    digitalWrite(S2, 0);
+    digitalWrite(S3, 0);
+    if (digitalRead(S0)==LOW and digitalRead(S1)==LOW and digitalRead(S2)==LOW and digitalRead(S3)==LOW){
+      return true;
     }else{
-      return FALSE;
+      return false;
     }
   }
 }
@@ -307,7 +368,7 @@ void unsigned readDemux(bdx){
     return false;
   }
 }
-
+*/
 /*
 // Função para retonar a leitura do pino demultiplexado pela id BDX(vide o arquivo ITENS-NECESSIDADES.xlxs)
 void boolean int Demux(bdx){
@@ -426,7 +487,7 @@ void SendCANFramesToSerial()
   // only send once at 1000 loops
   if (textCounter == 0)
   {
-    SendTextExtensionFrameToSerial(3203, "Hello RealDash, this is Arduino sending some text data");
+    SendTextExtensionFrameToSerial(3203, "Hello RealDash, this is Arduino sending S0me text data");
   }
   else if (textCounter == 1000)
   {
