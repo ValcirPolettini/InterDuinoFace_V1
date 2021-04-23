@@ -108,7 +108,7 @@ Mux muxCo(Pin(C, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxCo - Mux
 Mux muxDo(Pin(D, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxDo - Mux digital D for OUTPUT(5V)
 */
 void setup(){
-  Serial.begin(115200); // init serial
+  Serial.begin(9600); // init serial
   Serial.print("\nOla, setup iniciando...");
   pinMode(S0, OUTPUT);
   pinMode(S1, OUTPUT);
@@ -142,6 +142,7 @@ void loop()
   for(byte i=0; i <= 15; i++){
     delay(500);
     if(setDemux(i)){
+     delay(500);
      Serial.println("BDX: "+(String)i+" | S0:"+digitalRead(S0)+", S1:"+digitalRead(S1)+", S2:"+digitalRead(S2)+", S3:"+digitalRead(S3)+ " | A0:"+(String)analogRead(A0)+" A1:"+(String)analogRead(A1)+" D6:"+(String)digitalRead(6)+" D5:"+(String)digitalRead(5));
      delay(500);
     }else{
@@ -187,6 +188,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 1);
     digitalWrite(S2, 1);
     digitalWrite(S3, 1);
+    delay(500);
     if (digitalRead(S0)==HIGH and digitalRead(S1)==HIGH and digitalRead(S2)==HIGH and digitalRead(S3)==HIGH){
       return true;
     }else{
@@ -198,6 +200,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 1);
     digitalWrite(S2, 1);
     digitalWrite(S3, 0);
+    delay(500);
     if (digitalRead(S0)==HIGH and digitalRead(S1)==HIGH and digitalRead(S2)==HIGH and digitalRead(S3)==LOW){
       return true;
     }else{
@@ -209,6 +212,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 1);
     digitalWrite(S2, 0);
     digitalWrite(S3, 1);
+    delay(500);
     if (digitalRead(S0)==HIGH and digitalRead(S1)==HIGH and digitalRead(S2)==LOW and digitalRead(S3)==HIGH){
       return true;
     }else{
@@ -220,6 +224,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 1);
     digitalWrite(S2, 0);
     digitalWrite(S3, 0);
+    delay(500);
     if (digitalRead(S0)==HIGH and digitalRead(S1)==HIGH and digitalRead(S2)==LOW and digitalRead(S3)==LOW){
       return true;
     }else{
@@ -231,6 +236,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 0);
     digitalWrite(S2, 1);
     digitalWrite(S3, 1);
+    delay(500);
     if (digitalRead(S0)==HIGH and digitalRead(S1)==LOW and digitalRead(S2)==HIGH and digitalRead(S3)==HIGH){
       return true;
     }else{
@@ -242,6 +248,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 0);
     digitalWrite(S2, 1);
     digitalWrite(S3, 0);
+    delay(500);
     if (digitalRead(S0)==HIGH and digitalRead(S1)==LOW and digitalRead(S2)==HIGH and digitalRead(S3)==LOW){
       return true;
     }else{
@@ -253,6 +260,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 0);
     digitalWrite(S2, 0);
     digitalWrite(S3, 1);
+    delay(500);
     if (digitalRead(S0)==HIGH and digitalRead(S1)==LOW and digitalRead(S2)==LOW and digitalRead(S3)==HIGH){
       return true;
     }else{
@@ -264,6 +272,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 0);
     digitalWrite(S2, 0);
     digitalWrite(S3, 0);
+    delay(500);
     if (digitalRead(S0)==HIGH and digitalRead(S1)==LOW and digitalRead(S2)==LOW and digitalRead(S3)==LOW){
       return true;
     }else{
@@ -275,6 +284,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 1);
     digitalWrite(S2, 1);
     digitalWrite(S3, 1);
+    delay(500);
     if (digitalRead(S0)==LOW and digitalRead(S1)==HIGH and digitalRead(S2)==HIGH and digitalRead(S3)==HIGH){
       return true;
     }else{
@@ -286,6 +296,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 1);
     digitalWrite(S2, 1);
     digitalWrite(S3, 0);
+    delay(500);
     if (digitalRead(S0)==LOW and digitalRead(S1)==HIGH and digitalRead(S2)==HIGH and digitalRead(S3)==LOW){
       return true;
     }else{
@@ -297,6 +308,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 1);
     digitalWrite(S2, 0);
     digitalWrite(S3, 1);
+    delay(500);
     if (digitalRead(S0)==LOW and digitalRead(S1)==HIGH and digitalRead(S2)==LOW and digitalRead(S3)==HIGH){
       return true;
     }else{
@@ -308,6 +320,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 1);
     digitalWrite(S2, 0);
     digitalWrite(S3, 0);
+    delay(500);
     if (digitalRead(S0)==LOW and digitalRead(S1)==HIGH and digitalRead(S2)==LOW and digitalRead(S3)==LOW){
       return true;
     }else{
@@ -319,6 +332,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 0);
     digitalWrite(S2, 1);
     digitalWrite(S3, 1);
+    delay(500);
     if (digitalRead(S0)==LOW and digitalRead(S1)==LOW and digitalRead(S2)==HIGH and digitalRead(S3)==HIGH){
       return true;
     }else{
@@ -330,6 +344,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 0);
     digitalWrite(S2, 1);
     digitalWrite(S3, 0);
+    delay(500);
     if (digitalRead(S0)==LOW and digitalRead(S1)==LOW and digitalRead(S2)==HIGH and digitalRead(S3)==LOW){
       return true;
     }else{
@@ -341,6 +356,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 0);
     digitalWrite(S2, 0);
     digitalWrite(S3, 1);
+    delay(500);
     if (digitalRead(S0)==LOW and digitalRead(S1)==LOW and digitalRead(S2)==LOW and digitalRead(S3)==HIGH){
       return true;
     }else{
@@ -352,6 +368,7 @@ bool setDemux(int bdx){
     digitalWrite(S1, 0);
     digitalWrite(S2, 0);
     digitalWrite(S3, 0);
+    delay(500);
     if (digitalRead(S0)==LOW and digitalRead(S1)==LOW and digitalRead(S2)==LOW and digitalRead(S3)==LOW){
       return true;
     }else{
