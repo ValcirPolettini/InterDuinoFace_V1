@@ -143,7 +143,7 @@ void loop()
     delay(500);
     if(setDemux(i)){
      delay(500);
-     Serial.println("BDX: "+(String)i+" | S0:"+digitalRead(S0)+", S1:"+digitalRead(S1)+", S2:"+digitalRead(S2)+", S3:"+digitalRead(S3)+ " | A0:"+(String)analogRead(A0)+" A1:"+(String)analogRead(A1)+" D6:"+(String)digitalRead(6)+" D5:"+(String)digitalRead(5));
+     Serial.println("BDX: "+(String)i+" | S0:"+digitalRead(S0)+", S1:"+digitalRead(S1)+", S2:"+digitalRead(S2)+", S3:"+digitalRead(S3)+ " | A0:"+(String)analogRead(A0)+" A1:"+(String)analogRead(A1)+" D6("+i+"):"+(String)digitalRead(6)+" D5("+i+"):"+(String)digitalRead(5));
      delay(500);
     }else{
       Serial.print("\nFalha na execucao de BDX:"+(String)i);
