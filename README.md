@@ -23,4 +23,4 @@
  IDE Arduino library folder
 
 # [.androidControls - ]()
- APK control in CAN bus(volume,britghness)
+ APK control in CAN bus(volume,britghness,etc...)

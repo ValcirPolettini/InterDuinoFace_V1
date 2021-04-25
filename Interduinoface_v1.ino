@@ -1,100 +1,27 @@
-/**
- * ============================================================================
- *  Name        : RealDash_CAN.ino
- *  Part of     : RealDash
- *  Author      : Jani Immonen
- *  Created     : 15.10.2017
- *
- * Arduino example sketch of how to use RealDash CAN protocol.
- * 
- * This example code is free for any use.
- * 
- * www.realdash.net
- * ============================================================================
- * 
- * Variaveis/Variables:
- * 
- * km/h | mp/h;
- * km...;
- * tripe A;
- * tripe B;
- * Conta giro;
- * marcha(N,1,2,3,4,5,6);
- * setas;
- * farol;
- * combustível(tanque L | Galon);
- * odometro;
- * temperatura(motor,clima);
- * vacumetro;
- * tenção de bateria;
- * pressão de olho;
- * pressão de combustivel;
- * --- Conexões/Wirings --
- * Entradas Analogico(s)/ Inputs Analogic(s):
- * pressão de oleo;
- * temp. ambiente;
- * temp. motor;
- * litragem combustivel;
- * tensão de bateria;
- * Digital(On/Off):
- * velocimetro;
- * rpm;
- * cebolao oleo motor;
- * nivel fluido freio;
- * pisca lerta;
- * setas;
- * limpador;
- * farois;
- * portas;
- * vazão combustivel;
- * cebolão temp. motor;
- * PWM():
-**/
-
-// Include lib Demux 16 channel
-#include <Mux.h>
-using namespace admux;
-
-// Variables
-//char S[] = {A,B,C,D};
-//boolean bdx[15][3];
-//boolean bdx[][] = {{FALSE,FALSE,FALSE,FALSE},{FALSE,FALSE,FALSE,FALSE},{0,0,0,0}}; //0
 /*
-                  {0,0,0,1}, //1
-                  {0,0,1,0}, //2
-                  {0,0,1,1}, //3
-                  {0,1,0,0}, //4
-                  {0,1,0,1}, //5
-                  {0,1,1,0}, //6
-                  {0,1,1,1}, //7
-                  {1,0,0,0}, //8
-                  {1,0,0,1}, //9
-                  {1,0,1,0}, //10
-                  {1,0,1,1}, //11
-                  {1,1,0,0}, //12
-                  {1,1,0,1}, //13
-                  {1,1,1,0}, //14
-                  {1,1,1,1} //15
-;*/
-unsigned int digitalPins = 0;
-int analogPins[7] = {0};
+ * ============================================================================
+ *  Name        : InterDuinoFace_v1.ino
+ *  Part of     : Interduinoface(Interface with Arduino for RealDash)
+ *  Author      : Valcir Polettini
+ *  Created     : 03.29.2021
+ *  Link:       : https://github.com/ValcirPolettini/InterDuinoFace_V1
+ *  Fork:       : https://github.com/janimm/RealDash-extras
+ * ============================================================================
+ */
 
-unsigned int rpm = 0;
-unsigned int kpa = 992; // 99.2
-unsigned int tps = 965; // 96.5
-unsigned int clt = 80;  // 80 - 100
-unsigned int textCounter = 0;
-
-// Arduino digital and analog pins
-/*int A=A0;//19; //Pino A0 fisico
-int B=A1;//20; //Pino A1 fisico
-int C=D0;//9;  //Pino D0 fisico
-int D=D1;//8;  //Pino D1 fisico
-*/
-int S0=2; //Pino D2 fisico
-int S1=4; //Pino D4 fisico
-int S2=7; //Pino D7 fisico
-int S3=8; //Pino D8 fisico
+#include <Mux.h>              // Include lib Demux 16 channel
+using namespace admux;        //
+unsigned int digitalPins = 0; //
+int analogPins[7] = {0};      //
+unsigned int rpm = 0;         //
+unsigned int kpa = 992;       // 99.2
+unsigned int tps = 965;       // 96.5
+unsigned int clt = 80;        // 80 - 100
+unsigned int textCounter = 0; //
+int S0=2;                     //Pino D2 fisico
+int S1=4;                     //Pino D4 fisico
+int S2=7;                     //Pino D7 fisico
+int S3=8;                     //Pino D8 fisico
 /*
  * Creates a Mux instance.
  * 1st argument is the SIG (signal) pin (Arduino analog input pin A0).
@@ -108,8 +35,9 @@ Mux muxCo(Pin(C, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxCo - Mux
 Mux muxDo(Pin(D, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxDo - Mux digital D for OUTPUT(5V)
 */
 void setup(){
-  Serial.begin(9600); // init serial
-  Serial.print("\nOla, setup iniciando...");
+  Serial.begin(9600); // init serial 9600 in BAUDRATE for debuger simulator
+  //Serial.begin(115200); // init serial 115200 in BAUDRATE for normal use
+  Serial.print("\nOla, setup iniciando..."); 
   pinMode(S0, OUTPUT);
   pinMode(S1, OUTPUT);
   pinMode(S2, OUTPUT);
@@ -118,14 +46,11 @@ void setup(){
   digitalWrite(S1, HIGH);
   digitalWrite(S2, HIGH);
   digitalWrite(S3, HIGH);
-  delay(1000);
   digitalWrite(S0, LOW);
   digitalWrite(S1, LOW);
   digitalWrite(S2, LOW);
   digitalWrite(S3, LOW);
-  delay(500);
   Serial.print("\nOla, setup executado");
-  delay(100);
 }
 
 

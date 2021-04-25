@@ -1,0 +1,37 @@
+ Variaveis/Variables:
+ * 
+ * km/h | mp/h;
+ * km...;
+ * tripe A;
+ * tripe B;
+ * Conta giro;
+ * marcha(N,1,2,3,4,5,6);
+ * setas;
+ * farol;
+ * combustível(tanque L | Galon);
+ * odometro;
+ * temperatura(motor,clima);
+ * vacumetro;
+ * tenção de bateria;
+ * pressão de olho;
+ * pressão de combustivel;
+ * --- Conexões/Wirings --
+ * Entradas Analogico(s)/ Inputs Analogic(s):
+ * pressão de oleo;
+ * temp. ambiente;
+ * temp. motor;
+ * litragem combustivel;
+ * tensão de bateria;
+ * Digital(On/Off):
+ * velocimetro;
+ * rpm;
+ * cebolao oleo motor;
+ * nivel fluido freio;
+ * pisca lerta;
+ * setas;
+ * limpador;
+ * farois;
+ * portas;
+ * vazão combustivel;
+ * cebolão temp. motor;
+ * PWM():
