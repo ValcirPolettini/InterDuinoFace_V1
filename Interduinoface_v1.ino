@@ -22,18 +22,21 @@ int S0=2;                     //Pino D2 fisico
 int S1=4;                     //Pino D4 fisico
 int S2=7;                     //Pino D7 fisico
 int S3=8;                     //Pino D8 fisico
-/*
- * Creates a Mux instance.
- * 1st argument is the SIG (signal) pin (Arduino analog input pin A0).
- * 2nd argument is the S0-S3 (channel control) pins (Arduino pins 8, 9, 10, 11).
- */
-/*Mux muxA(Pin(A, INPUT, PinType::Analog), Pinset(S0,S1,S2,S3));
-Mux muxB(Pin(B, INPUT, PinType::Analog), Pinset(S0,S1,S2,S3));
-Mux muxC(Pin(C, INPUT, PinType::Digital), Pinset(S0,S1,S2,S3));
-Mux muxD(Pin(D, INPUT, PinType::Digital), Pinset(S0,S1,S2,S3));
-Mux muxCo(Pin(C, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxCo - Mux digital C for OUTPUT(5V)
-Mux muxDo(Pin(D, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxDo - Mux digital D for OUTPUT(5V)
-*/
+int D0=5;                     //Pino D5 fisico;
+int D1=6;                     //Pino D6 fisico;
+
+ /*
+  * Creates a Mux instance outside the setup() scope.
+  * 1st argument is the SIG (signal) pin (Arduino analog input pin A0).
+  * 2nd argument is the S0-S3 (channel control) pins (Arduino pins 8, 9, 10, 11).
+  */
+  Mux muxA0(Pin(A0, INPUT, PinType::Analog), Pinset(S0,S1,S2,S3));
+  Mux muxA1(Pin(A1, INPUT, PinType::Analog), Pinset(S0,S1,S2,S3));
+  Mux muxD0(Pin(D0, INPUT, PinType::Digital), Pinset(S0,S1,S2,S3));
+  Mux muxD1(Pin(D1, INPUT, PinType::Digital), Pinset(S0,S1,S2,S3));
+  //Mux muxD0o(Pin(D0, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxCo - Mux digital C for OUTPUT(5V)
+  //Mux muxD1o(Pin(D1, OUTPUT, PinType::Digital), Pinset(S0,S1,S2,S3)); // muxDo - Mux digital D for OUTPUT(5V)
+
 void setup(){
   Serial.begin(9600); // init serial 9600 in BAUDRATE for debuger simulator
   //Serial.begin(115200); // init serial 115200 in BAUDRATE for normal use
@@ -64,6 +67,15 @@ void loop()
   ReadAnalogStatuses();
   Serial.print("------------------\n");
   */
+  //Funcao utilizando a biblioteca Mux conforme exemplo de leitira analogica em ....
+  int data;
+  for (byte i = 0; i < muxA0.channelCount(); i++) {
+    data = muxA0.read(i) /* Reads from channel i (returns a value from 0 to 1023) */;
+    Serial.print("Potentiometer at channel "); Serial.print(i); Serial.print(" is at "); Serial.print((double) (data) * 100 / 1023); Serial.println("%%");
+    delay(500);
+  }
+ /*
+  //Funcao basica para teste 1
   for(byte i=0; i <= 15; i++){
     delay(500);
     if(setDemux(i)){
@@ -76,8 +88,8 @@ void loop()
     }
   }
   Serial.println("\nOla, loop finalizado.");
-  delay(500);
-  /*
+  */  
+ /*
   SendCANFramesToSerial();
 
   // just some dummy values for simulated engine parameters
@@ -104,6 +116,7 @@ void loop()
     textCounter = 0;
   }
   */
+  delay(500);
 }
 
 // Função para enderecar o leitor no pino correto

@@ -78,3 +78,7 @@ VALCIR12{
 VALCIR13{
     - Apriporado firmware utilizando a biblioteca Analog_Digital_Multiplexers-3.0.0, utilizando [teste_mux_logic.simu](https://github.com/ValcirPolettini/InterDuinoFace_V1/tree/main/.pcb/teste_mux_logic.simu);
 }
+
+VALCIR14{
+    - Realizado testes e ajustes com o [teste.simu](https://github.com/ValcirPolettini/InterDuinoFace_V1/tree/main/.pcb/teste_mux_logic.simu);
+}
