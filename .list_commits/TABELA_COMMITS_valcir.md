@@ -82,3 +82,7 @@ VALCIR13{
 VALCIR14{
     - Realizado testes e ajustes com o [teste.simu](https://github.com/ValcirPolettini/InterDuinoFace_V1/tree/main/.pcb/teste_mux_logic.simu);
 }
+
+VALCIR15{
+    - Desenvolvido peças 3D para modelo final e resdesenhado circuito para portar montagem final.
+}
