@@ -9,8 +9,14 @@
  * Android - 4.1.1(Tablet DL 1603 -> Rockchip RK2929)
  * Virtual serial port -
  * InterVisualFace - v1
- * Codigos CAN:
  * 
+ * Frame padrao CAN:
+ * |SOF - Start of Frame | IDENTIFIER(11bits)   | RTR(1bit) - Remote Transmission Request | IDE(1bit) - IDentifer Extension | R0(1bit) | DLC(4bits) - Data Lenght Code | BYTES DATA(64bits)         | CRC(16bits) - Cyclic Redundancy Check | ACK(2bits) - Acknowledge | EOF(7bits) - End of Frame | IFS(7bits) - Iner-Frame Space |
+ * |sof                  | 00000000000          |  0                                      |  0                              | 0        | 0000                          | 8 bytes -> 64 bits         | 00000000000000 0                      | 0 0                      | 0000000                   | 0000000                       |
+ * 
+ * Frame Estendido CAN:
+ * |SOF - Start of Frame | IDENTIFIER(11bits)   | SRR - Substitute Remote Request | IDENTIFIER(18bits) | RTR(1bit) - Remote Transmission Request | IDE(1bit) - IDentifer Extension | R0(1bit) | DLC(4bits) - Data Lenght Code | BYTES DATA(64bits)         | CRC(16bits) - Cyclic Redundancy Check | ACK(2bits) - Acknowledge | EOF(7bits) - End of Frame | IFS(7bits) - Iner-Frame Space |
+ * |sof                  | 00000000000          |                                 | 000000000000000000 |  0                                      |  0                              | 0        | 0000                          | 8 bytes -> 64 bits         | 00000000000000 0                      | 0 0                      | 0000000                   | 0000000                       |
  * List frame index for :
  * * Please use this wire pattern for your project's connections.
  * MODULO:          | TRAÇÃO / DRIVE|TRACTION             |

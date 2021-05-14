@@ -1,0 +1,12 @@
+# Writing all output to: C:\Users\Valcir\Documents\GitHub\InterDuinoFace_V1\.pcb\InterDuinoFace_V1.log
+set pad_wire_necking on
+bus diagonal
+fanout 5
+route 20
+clean 2
+route 20 16
+clean 2
+filter 5
+recorner diagonal
+status_file
+
